@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day, Abby!</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Georgia',serif;
+    background:#B91C1C;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* ---------- CARD ---------- */
+
+.card{
+    width:450px;
+    height:500px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform .8s cubic-bezier(.4,0,.2,1);
+}
+.card.flipped{
+    transform:rotateY(180deg);
+}
+
+.card-face{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    border: 4px solid #000;
+    border-radius: 15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.card-front,
+.card-back{
+    background:#bae1ff;
+}
+
+.card-back{
+    transform:rotateY(180deg);
+}
+
+h1{
+    color:#DC143C;
+    font-size:2.5em;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.name{
+    color:#0066cc;
+    font-size:1.3em;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* ---------- FLOWERS ---------- */
+
+.flowers{
+    display:flex;
+    gap:10px;
+    margin:25px 0;
+    animation:sway 3s ease-in-out infinite;
+    justify-content:center;
+}
+
+@keyframes sway{
+    0%,100%{transform:rotate(-2deg);}
+    50%{transform:rotate(2deg);}
+}
+
+.flower-svg{
+    width:80px;
+    height:120px;
+}
+
+/* ---------- TEXT ---------- */
+
+.message{
+    color:#0066cc;
+    text-align:center;
+    font-size:1.1em;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.silver-text{
+    color:#b0b0b0;
+}
+
+.card-back .message{
+    font-size:1.25em;
+}
+
+.card-back .click-hint{
+    font-size:1em;
+}
+
+.click-hint{
+    color:rgba(0,102,204,.8);
+    font-size:.9em;
+    margin-top:25px;
+}
+
+/* ---------- HEARTS ---------- */
+
+.hearts-background{
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+    top:0;
+    left:0;
+}
+
+.heart-emoji{
+    position:absolute;
+    font-size:2em;
+    animation:float-up linear forwards;
+    opacity:0;
+}
+
+@keyframes float-up{
+    0%{
+        transform:translateY(100vh) translateX(0);
+        opacity:0;
+    }
+    10%{opacity:.7;}
+    80%{opacity:.7;}
+    100%{
+        transform:translateY(-120vh) translateX(var(--drift));
+        opacity:0;
+    }
+}
+
+.card-container{
+    perspective:1000px;
+    cursor:pointer;
+    position:relative;
+    z-index:10;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts-background" id="hearts"></div>
+
+<audio id="bgMusic" autoplay loop style="display:none;">
+  <source src="silver-linings.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card-container" onclick="flipCard()">
+<div class="card" id="card">
+
+<div class="card-face card-front">
+<h1>Happy</h1>
+<h1>Valentine's Day</h1>
+<h2 class="name">Abby!</h2>
+
+<div class="flowers">
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="80" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="35" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(-30 35 110)"/>
+  <ellipse cx="65" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(30 65 110)"/>
+  <!-- Petals - Red Tulip -->
+  <path d="M 50 10 Q 40 30 42 50 Q 45 60 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+  <path d="M 50 10 Q 35 35 32 55 Q 32 65 40 75 Q 48 62 50 70 Q 45 60 42 50 Q 40 30 50 10" fill="#ff4757"/>
+  <path d="M 50 10 Q 65 35 68 55 Q 68 65 60 75 Q 52 62 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+</svg>
+
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="90" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="32" cy="115" rx="7" ry="14" fill="#4caf50" opacity="0.8" transform="rotate(-35 32 115)"/>
+  <ellipse cx="68" cy="115" rx="7" ry="14" fill="#4caf50" opacity="0.8" transform="rotate(35 68 115)"/>
+  <!-- Lily - 5 petals -->
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(0 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(72 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(144 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(216 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(288 50 40)"/>
+  <!-- Center -->
+  <circle cx="50" cy="55" r="8" fill="#ffd700"/>
+  <!-- Stamens -->
+  <line x1="50" y1="50" x2="50" y2="40" stroke="#ff6b6b" stroke-width="1.5"/>
+  <line x1="45" y1="53" x2="40" y2="47" stroke="#ff6b6b" stroke-width="1.5"/>
+  <line x1="55" y1="53" x2="60" y2="47" stroke="#ff6b6b" stroke-width="1.5"/>
+</svg>
+
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="80" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="35" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(-30 35 110)"/>
+  <ellipse cx="65" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(30 65 110)"/>
+  <!-- Petals - Red Tulip -->
+  <path d="M 50 10 Q 40 30 42 50 Q 45 60 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+  <path d="M 50 10 Q 35 35 32 55 Q 32 65 40 75 Q 48 62 50 70 Q 45 60 42 50 Q 40 30 50 10" fill="#ff4757"/>
+  <path d="M 50 10 Q 65 35 68 55 Q 68 65 60 75 Q 52 62 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+</svg>
+</div>
+
+<p class="click-hint">🖤 Click to open 🖤</p>
+</div>
+
+<div class="card-face card-back">
+
+<div class="flowers">
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="80" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="35" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(-30 35 110)"/>
+  <ellipse cx="65" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(30 65 110)"/>
+  <!-- Petals - Red Tulip -->
+  <path d="M 50 10 Q 40 30 42 50 Q 45 60 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+  <path d="M 50 10 Q 35 35 32 55 Q 32 65 40 75 Q 48 62 50 70 Q 45 60 42 50 Q 40 30 50 10" fill="#ff4757"/>
+  <path d="M 50 10 Q 65 35 68 55 Q 68 65 60 75 Q 52 62 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+</svg>
+
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="90" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="32" cy="115" rx="7" ry="14" fill="#4caf50" opacity="0.8" transform="rotate(-35 32 115)"/>
+  <ellipse cx="68" cy="115" rx="7" ry="14" fill="#4caf50" opacity="0.8" transform="rotate(35 68 115)"/>
+  <!-- Lily - 5 petals -->
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(0 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(72 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(144 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(216 50 40)"/>
+  <ellipse cx="50" cy="40" rx="12" ry="35" fill="#ffb6ff" transform="rotate(288 50 40)"/>
+  <!-- Center -->
+  <circle cx="50" cy="55" r="8" fill="#ffd700"/>
+  <!-- Stamens -->
+  <line x1="50" y1="50" x2="50" y2="40" stroke="#ff6b6b" stroke-width="1.5"/>
+  <line x1="45" y1="53" x2="40" y2="47" stroke="#ff6b6b" stroke-width="1.5"/>
+  <line x1="55" y1="53" x2="60" y2="47" stroke="#ff6b6b" stroke-width="1.5"/>
+</svg>
+
+<svg class="flower-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stem -->
+  <line x1="50" y1="140" x2="50" y2="80" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="35" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(-30 35 110)"/>
+  <ellipse cx="65" cy="110" rx="8" ry="15" fill="#4caf50" opacity="0.8" transform="rotate(30 65 110)"/>
+  <!-- Petals - Red Tulip -->
+  <path d="M 50 10 Q 40 30 42 50 Q 45 60 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+  <path d="M 50 10 Q 35 35 32 55 Q 32 65 40 75 Q 48 62 50 70 Q 45 60 42 50 Q 40 30 50 10" fill="#ff4757"/>
+  <path d="M 50 10 Q 65 35 68 55 Q 68 65 60 75 Q 52 62 50 70 Q 55 60 58 50 Q 60 30 50 10" fill="#ff1744"/>
+</svg>
+</div>
+
+<div class="message">
+<p>You're my <span class="silver-text">silver lining</span>,</p>
+<p>and I'll always love you.</p>
+<p style="margin-top:20px;font-style:italic;">Will you be my valentine? 💕</p>
+</div>
+
+<p class="click-hint">🖤 Click to flip back 🖤</p>
+
+</div>
+</div>
+</div>
+
+<script>
+// Background music
+const audio = document.getElementById('bgMusic');
+audio.volume = 0.3;
+audio.play().catch(() => {
+  // Autoplay may be blocked by browser - user interaction will enable it
+  document.addEventListener('click', () => {
+    audio.play().catch(err => console.log('Could not play audio'));
+  }, { once: true });
+});
+
+function flipCard(){
+    document.getElementById("card").classList.toggle("flipped");
+}
+
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.className="heart-emoji";
+    heart.textContent="🤍";
+
+    const duration=Math.random()*3+6;
+    const drift=(Math.random()*80-40)+"px";
+
+    heart.style.left=Math.random()*100+"%";
+    heart.style.animationDuration=duration+"s";
+    heart.style.setProperty("--drift",drift);
+
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(()=>heart.remove(),duration*1000);
+}
+
+setInterval(createHeart,150);
+
+for(let i=0;i<100;i++) createHeart();
+</script>
+
+</body>
+</html>
